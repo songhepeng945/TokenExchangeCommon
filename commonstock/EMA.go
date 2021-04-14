@@ -8,11 +8,12 @@ import (
 
 // EMA struct
 type EMA struct {
-	Alpha    float64
-	Period   int //默认计算几天的EMA
-	points   []*EMAPoint
-	kline    []*commonmodels.Kline
-	LastTime int64
+	Alpha     float64
+	Period    int //默认计算几天的EMA
+	points    []*EMAPoint
+	MapPoints map[int64]*EMAPoint
+	kline     []*commonmodels.Kline
+	LastTime  int64
 }
 
 type EMAPoint struct {
@@ -21,7 +22,7 @@ type EMAPoint struct {
 
 // NewEMA new Func
 func NewEMA(list []*commonmodels.Kline, period int) *EMA {
-	m := &EMA{kline: list, Period: period, Alpha: 2.0 / (float64(period) + 1.0)}
+	m := &EMA{kline: list, Period: period, Alpha: 2.0 / (float64(period) + 1.0), MapPoints: make(map[int64]*EMAPoint)}
 	return m
 }
 
@@ -40,7 +41,7 @@ func (e *EMA) GetPoints() []*EMAPoint {
 
 // Add adds a new Value to Ema
 // 使用方法，先添加最早日期的数据,最后一条应该是当前日期的数据，结果与 AICoin 对比完全一致
-func (e *EMA) Add(timestamp time.Time, value float64) {
+func (e *EMA) Add(timestamp time.Time, value float64) float64 {
 	var p *EMAPoint
 	emaTminusOne := value
 	lastTime := timestamp.Unix()
@@ -54,6 +55,7 @@ func (e *EMA) Add(timestamp time.Time, value float64) {
 		p = new(EMAPoint)
 		p.Time = timestamp
 		e.points = append(e.points, p)
+		e.MapPoints[lastTime] = p
 	}
 
 	//平滑指数，一般取作2/(N+1)
@@ -65,4 +67,5 @@ func (e *EMA) Add(timestamp time.Time, value float64) {
 	emaT := e.Alpha*value + (1-e.Alpha)*emaTminusOne
 	p.Value = emaT
 	e.LastTime = e.points[len(e.points)-1].Time.Unix()
+	return emaT
 }
