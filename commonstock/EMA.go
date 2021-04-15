@@ -3,7 +3,7 @@ package commonstock
 import (
 	"time"
 
-	"github.com/idoall/TokenExchangeCommon/commonmodels"
+	"github.com/songhepeng945/TokenExchangeCommon/commonmodels"
 )
 
 // EMA struct

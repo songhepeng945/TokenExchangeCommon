@@ -1,7 +1,7 @@
 package commonstock
 
 import (
-	"github.com/idoall/TokenExchangeCommon/commonmodels"
+	"github.com/songhepeng945/TokenExchangeCommon/commonmodels"
 )
 
 // MA struct
