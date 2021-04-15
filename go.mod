@@ -1,4 +1,4 @@
-module github.com/idoall/TokenExchangeCommon
+module github.com/songhepeng945/TokenExchangeCommon
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
@@ -7,7 +7,6 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
-	github.com/stretchr/testify v1.2.2 // indirect
 )
 
 go 1.13
