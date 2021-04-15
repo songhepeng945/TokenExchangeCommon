@@ -8,7 +8,7 @@ package commonstock
 // 4.若当日收盘价＝上日收盘价，则当日OBV=前一日OBV
 
 import (
-	"github.com/idoall/TokenExchangeCommon/commonmodels"
+	"github.com/songhepeng945/TokenExchangeCommon/commonmodels"
 )
 
 // OBV struct
